@@ -9,17 +9,20 @@ Windows PC 上で、指定した YouTube の動画を Playwright の自動操作
 - OS は Windows。
 - 実行環境は、この PC に入っている Node.js と npm。
 - 言語は TypeScript。
-- テストランナーは `@playwright/test`。
+- 結合テストのランナーは `@playwright/test`。単体テストのランナーは Node.js のテストランナー。
 - 再生に使うブラウザは Chromium。Playwright が配布する Firefox と WebKit は、初版では使わない。
 
 ## 決まっていること
 
 - プロジェクトのフォルダ名は `playwright-youtube-auto-play`。
-- テストファイルは `tests` に置き、ファイル名は `*.spec.ts`。
+- ソースは `src` に置く。
+- 単体テストは `tests/unit` に置き、ファイル名は `*.test.ts`。ブラウザは使わない。
+- 結合テストは `tests/integration` に置き、ファイル名は `*.spec.ts`。
+- ソースを追加または変更するときは、同じ変更で単体テストと結合テストを追加または更新する。
 - 型検査は `tsc --noEmit`。`package.json` の `typecheck` から実行する。
-- テスト実行は `playwright test`。`package.json` の `test` から実行する。
+- `npm test` は、`src` が無いときはテスト 0 件で成功する。`src` があるときは単体テストと結合テストのファイルを要求し、単体テストのあと結合テストを実行する。`push` と pull request では GitHub Actions も `npm test` を実行する。
 - TypeScript の `module` と `moduleResolution` は `NodeNext`。
-- `tsc` は JavaScript を出力しない（`noEmit`）。テストの実行時変換は Playwright が行う。
+- `tsc` は JavaScript を出力しない（`noEmit`）。単体テストは Node.js が TypeScript を直接実行し、結合テストの変換は Playwright が行う。
 - 再生対象は、1本の動画 URL。プロジェクト直下の `.env` に `YOUTUBE_URL` として書く。このファイルはリポジトリに置かない。
 - Google アカウントにはログインしない。クッキーや `storageState` は作らない。
 - 完了は、指定した動画の再生が始まったこと。テスト終了時にブラウザは閉じる。再生を続けたままにはしない。

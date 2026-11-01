@@ -1,18 +1,18 @@
 ---
-description: テストの置き場所、既定ブラウザ、ロケーター
-globs: tests/**/*.spec.ts
+description: 結合テストの置き場所、Chromium、ロケーター
+globs: tests/integration/**/*.spec.ts
 alwaysApply: false
 ---
 
-# Playwright テスト
+# 結合テスト
 
-テストは `tests/**/*.spec.ts` に置き、対象は `docs/design.md` の YouTube 自動再生だけにします。`playwright.dev` など練習用サイトのテストは追加しません。`@playwright/test` の `test` と `expect` を使い、要素は役割とアクセシブルネームで探します。
+YouTube を開くテストは `tests/integration/**/*.spec.ts` に置きます。`@playwright/test` の `test` と `expect` を使い、要素は役割とアクセシブルネームで探します。`playwright.dev` など練習用サイトのテストは追加しません。
 
 ```ts
 // 練習用サイトへのテストは置かない
 await page.goto('https://playwright.dev/');
 ```
 
-再生に使うブラウザは Chromium です。Firefox と WebKit のプロジェクトは追加しません。`package.json` の `test` に `--headed` は常設しません。
+ブラウザは Chromium だけです。Firefox と WebKit のプロジェクトは追加しません。`package.json` の `test` に `--headed` は常設しません。
 
-実行は `npm test` です。ウィンドウを見るときだけ、コマンドに `--headed` を足します。
+単体テストで足りる判定を、ここへ書きません。実行は `npm run test:integration`、全体は `npm test` です。

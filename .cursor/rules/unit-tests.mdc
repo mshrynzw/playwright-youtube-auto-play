@@ -1,0 +1,20 @@
+---
+description: ブラウザを使わない単体テストの置き場所
+globs: tests/unit/**/*.test.ts
+alwaysApply: false
+---
+
+# 単体テスト
+
+ブラウザを使わない判定は `tests/unit/**/*.test.ts` に置きます。Node.js の `node:test` と `node:assert/strict` を使います。
+
+```ts
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+
+test('受け付ける動画 URL を判定する', () => {
+  assert.equal(isWatchUrl('https://www.youtube.com/watch?v=abc'), true);
+});
+```
+
+YouTube を開く操作は結合テストへ置きます。実行は `npm run test:unit`、全体は `npm test` です。

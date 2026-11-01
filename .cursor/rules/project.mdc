@@ -9,6 +9,8 @@ alwaysApply: true
 
 再生処理は `docs/design.md` の範囲だけにします。ログイン、再生を続けたままにする処理、同意ボタンや広告のスキップは追加しません。
 
+`src` を追加または変更するときは、同じ変更で `tests/unit` の単体テストと `tests/integration` の結合テストを追加または更新し、`npm test` を実行します。
+
 ```ts
 // ログインや広告スキップで先へ進まない
 await page.getByRole('button', { name: '同意する' }).click();

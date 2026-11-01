@@ -25,25 +25,32 @@ Copy-Item .env.example .env
 
 | コマンド | 内容 |
 | --- | --- |
-| `npm test` | Playwright のテストを実行する。既定ではウィンドウを出さない |
+| `npm test` | 単体テストのあと結合テストを実行する。既定ではウィンドウを出さない |
+| `npm run test:unit` | `tests/unit` の単体テストだけを実行する |
+| `npm run test:integration` | `tests/integration` の結合テストだけを実行する |
 | `npm run typecheck` | `tsc --noEmit` で型だけ検査する。問題が無いときは何も表示しない |
-| `npx playwright test --headed` | ブラウザウィンドウを表示してテストする |
+| `npx playwright test --headed` | 結合テストを、ブラウザウィンドウを表示して実行する |
 
-設定ファイルがまだ無いあいだも、再生に使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
+設定は [playwright.config.ts](playwright.config.ts) にあり、結合テストが使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
 
 ## ディレクトリ
 
 ```text
-docs/requirements.md    要件定義
-docs/design.md          初版の設計
-.env                    再生する動画の URL。コミットしない
-.env.example            YOUTUBE_URL の見本
-tests/*.spec.ts         YouTube 自動再生のテスト。設計の実装時に追加する
-tsconfig.json           TypeScript の設定。JavaScript は出力しない
-package.json            test と typecheck
+docs/requirements.md                 要件定義
+docs/design.md                       初版の設計
+.env                                 再生する動画の URL。コミットしない
+.env.example                         YOUTUBE_URL の見本
+src/                                 再生のソース。実装時に追加する
+tests/unit/**/*.test.ts              単体テスト。ソースと同時に追加する
+tests/integration/**/*.spec.ts       結合テスト。ソースと同時に追加する
+scripts/check-test-files.cjs         src があるとき、両方のテストを要求する
+playwright.config.ts                 Chromium と .env の設定
+.github/workflows/test.yml           push と pull request で npm test を実行する
 ```
 
-再生のテストはまだありません。`npm test` は、テストファイルが無いため失敗します。
+再生のソースとテストはまだありません。ソースが無いあいだ、`npm test` はテスト 0 件で成功します。`src` に TypeScript を追加したときは、単体テストと結合テストが同じ変更に無いと `npm test` は失敗します。
+
+`push` と pull request では GitHub Actions が `npm test` を実行します。結合テストが読む `YOUTUBE_URL` は、リポジトリの Secrets に同名で登録します。
 
 ## 対象外
 
