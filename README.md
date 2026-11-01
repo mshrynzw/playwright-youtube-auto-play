@@ -29,9 +29,9 @@ Copy-Item .env.example .env
 | `npm run test:unit` | `tests/unit` の単体テストだけを実行する |
 | `npm run test:integration` | `tests/integration` の結合テストだけを実行する |
 | `npm run typecheck` | `tsc --noEmit` で型だけ検査する。問題が無いときは何も表示しない |
-| `npx playwright test --headed` | 結合テストを、ブラウザウィンドウを表示して実行する |
+| `npx playwright test --headed` | ブラウザを表示して、指定した動画の再生を開始する |
 
-設定は [playwright.config.ts](playwright.config.ts) にあり、結合テストが使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
+設定は [playwright.config.ts](playwright.config.ts) にあり、再生に使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
 
 ## ディレクトリ
 
