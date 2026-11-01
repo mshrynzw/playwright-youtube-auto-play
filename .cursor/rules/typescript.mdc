@@ -1,0 +1,21 @@
+---
+description: NodeNext と noEmit を維持する
+globs: "**/*.ts"
+alwaysApply: false
+---
+
+# TypeScript
+
+`tsconfig.json` の `module` と `moduleResolution` は `NodeNext`、`strict` と `noEmit` は維持します。テストを `tsc` で JavaScript に書き出してから Playwright に渡す script は足しません。
+
+```ts
+// テストファイルは import を使う
+import { test, expect } from '@playwright/test';
+```
+
+```ts
+// require には戻さない
+const { test, expect } = require('@playwright/test');
+```
+
+型検査は `npm run typecheck` です。TypeScript 7 には `tsserver.js` が無いので、`typescript.tsdk` を `node_modules/typescript/lib` に設定しません。

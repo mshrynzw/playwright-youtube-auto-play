@@ -1,0 +1,17 @@
+{
+  // TypeScript 7 のパッケージに tsserver.js は無い。
+  // typescript.tsdk は設定しない。エディタは Cursor 同梱の言語サービスを使う。
+  // 型検査の正は npm run typecheck。
+  "files.exclude": {
+    "**/test-results": true,
+    "**/playwright-report": true,
+    "**/blob-report": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/test-results": true,
+    "**/playwright-report": true,
+    "**/blob-report": true
+  },
+  "playwright.reuseBrowser": true
+}
