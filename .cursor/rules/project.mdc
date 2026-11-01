@@ -17,4 +17,4 @@ await page.getByRole('button', { name: '同意する' }).click();
 ## 対象外
 
 - 再生回数や評価を増やす繰り返し再生、待機、複数アカウント操作は書きません。
-- クッキー、`storageState`、パスワード、トークンをリポジトリに置きません。
+- クッキー、`storageState`、パスワード、トークン、`YOUTUBE_URL` の入った `.env` をリポジトリに置きません。

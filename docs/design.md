@@ -16,7 +16,7 @@
 
 ## 入力
 
-動画 URL は環境変数 `YOUTUBE_URL` から読む。値はリポジトリに書かない。`.env` は [`.gitignore`](../.gitignore) の対象である。
+動画 URL は、プロジェクト直下の `.env` に環境変数 `YOUTUBE_URL` として書く。このファイルはコミットしない。変数名だけの見本は [`.env.example`](../.env.example) である。実装時に `playwright.config.ts` から `.env` を読み、テストは `YOUTUBE_URL` を参照する。
 
 受け付ける URL は、`https://www.youtube.com/watch?v=` で始まるもの、または `https://youtu.be/` で始まるもの。それ以外は失敗とする。
 
@@ -56,8 +56,10 @@ flowchart TD
 ```text
 docs/requirements.md       要件
 docs/design.md             この設計
+.env                       YOUTUBE_URL を書く。コミットしない
+.env.example               変数名だけの見本
 tests/*.spec.ts            再生のテスト。この設計の実装時に追加する
-playwright.config.ts       Chromium だけを使う設定。実装時に追加する
+playwright.config.ts       .env の読み込みと、Chromium だけを使う設定。実装時に追加する
 ```
 
-`YOUTUBE_URL` はリポジトリの外に置く。テストと設定ファイルは、この設計書を実装する作業で追加する。
+テストと設定ファイルは、この設計書を実装する作業で追加する。

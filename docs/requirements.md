@@ -20,7 +20,7 @@ Windows PC 上で、指定した YouTube の動画を Playwright の自動操作
 - テスト実行は `playwright test`。`package.json` の `test` から実行する。
 - TypeScript の `module` と `moduleResolution` は `NodeNext`。
 - `tsc` は JavaScript を出力しない（`noEmit`）。テストの実行時変換は Playwright が行う。
-- 再生対象は、1本の動画 URL。環境変数 `YOUTUBE_URL` から読む。リポジトリには書かない。
+- 再生対象は、1本の動画 URL。プロジェクト直下の `.env` に `YOUTUBE_URL` として書く。このファイルはリポジトリに置かない。
 - Google アカウントにはログインしない。クッキーや `storageState` は作らない。
 - 完了は、指定した動画の再生が始まったこと。テスト終了時にブラウザは閉じる。再生を続けたままにはしない。
 - ウィンドウは既定では出さない。見るときは `npx playwright test --headed`。

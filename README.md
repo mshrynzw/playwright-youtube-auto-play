@@ -14,9 +14,12 @@
 ```powershell
 npm install
 npx playwright install
+Copy-Item .env.example .env
 ```
 
 `npm install` は `@playwright/test` と TypeScript を入れます。`npx playwright install` は Chromium、Firefox、WebKit を `%USERPROFILE%\AppData\Local\ms-playwright` へ置きます。必要な版が既にあるときは、何も表示せず終了します。
+
+再生する動画の URL は、`.env` の `YOUTUBE_URL` に書きます。`.env` はコミットしません。見本の変数名は `.env.example` にあります。
 
 ## コマンド
 
@@ -33,12 +36,14 @@ npx playwright install
 ```text
 docs/requirements.md    要件定義
 docs/design.md          初版の設計
+.env                    再生する動画の URL。コミットしない
+.env.example            YOUTUBE_URL の見本
 tests/*.spec.ts         YouTube 自動再生のテスト。設計の実装時に追加する
 tsconfig.json           TypeScript の設定。JavaScript は出力しない
 package.json            test と typecheck
 ```
 
-再生のテストはまだありません。`npm test` は、テストファイルが無いため失敗します。動画 URL は環境変数 `YOUTUBE_URL` から読み、リポジトリには書きません。
+再生のテストはまだありません。`npm test` は、テストファイルが無いため失敗します。
 
 ## 対象外
 
