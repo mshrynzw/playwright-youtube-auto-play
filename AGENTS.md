@@ -1,19 +1,12 @@
 # AGENTS.md
 
-このリポジトリで作業するエージェント向けの指示です。要件の正本は `docs/requirements.md` です。実装や文書を変えるときは、そのファイルと矛盾させないでください。
+このリポジトリで作業するエージェント向けの指示です。要件の正本は `docs/requirements.md`、初版の動作の正本は `docs/design.md` です。実装や文書を変えるときは、この2つと矛盾させないでください。
 
 ## プロジェクト
 
 このリポジトリの目的は、指定した YouTube の動画を自動操作で再生開始することです。Playwright の練習用コードや `playwright.dev` へのテストは置かず、練習は `D:\Code\playwright-tutorial` で行います。言語は TypeScript、実行は `@playwright/test` です。
 
-`docs/requirements.md` の「YouTube 自動再生」に未決定の項目があるあいだ、次は追加しません。
-
-- YouTube を開く処理、再生、一時停止、次の動画への移動
-- Google アカウントへのログインと、そのセッションの保存
-- YouTube 向けの `playwright.config.ts`（ブラウザの固定、headed の固定、タイムアウトの調整）
-- 広告、同意ダイアログ、年齢確認、再生できない動画への対処
-
-決まった項目だけを `docs/requirements.md` に書き、その範囲で実装します。
+再生処理を追加するときは `docs/design.md` に従います。ログイン、クッキー、`storageState`、再生を続けたままにする処理、同意ボタンや広告スキップの自動化は追加しません。
 
 ## 対象外
 
@@ -39,9 +32,9 @@ npm test
 - テストは `tests/**/*.spec.ts` に置きます。
 - `module` と `moduleResolution` は `NodeNext` のままにします。
 - TypeScript のソースでは `import` を使います。
-- 設定ファイルが無いあいだ、実行ブラウザは Chromium です。
+- 設定ファイルがまだ無いあいだも、再生に使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
 - TypeScript 7 のパッケージに `tsserver.js` はありません。`.vscode` の `typescript.tsdk` を `node_modules/typescript/lib` に設定しないでください。エディタの言語サービスは Cursor 同梱のものを使い、型が正しいかの確認は `npm run typecheck` で行います。
 
 ## 現状
 
-YouTube の再生テストはまだありません。`docs/requirements.md` の「YouTube 自動再生」が決まるまで、`tests` にテストファイルを追加しません。
+初版の設計は `docs/design.md` にあります。再生のテストと `playwright.config.ts` はまだありません。実装するときは、その設計のファイル構成に従います。

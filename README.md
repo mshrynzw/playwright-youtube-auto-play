@@ -1,8 +1,8 @@
 # playwright-youtube-auto-play
 
-指定した YouTube の動画を、Playwright の自動操作で再生開始するプロジェクトです。再生の対象や完了条件は未決定なので、その実装はまだありません。
+指定した YouTube の動画を、Playwright の自動操作で再生開始するプロジェクトです。初版の動作は設計済みで、再生処理の実装はまだありません。
 
-要件の正本は [docs/requirements.md](docs/requirements.md) です。
+要件は [docs/requirements.md](docs/requirements.md)、設計は [docs/design.md](docs/design.md) です。
 
 ## 必要なもの
 
@@ -26,21 +26,20 @@ npx playwright install
 | `npm run typecheck` | `tsc --noEmit` で型だけ検査する。問題が無いときは何も表示しない |
 | `npx playwright test --headed` | ブラウザウィンドウを表示してテストする |
 
-設定ファイルが無いあいだ、テストが使うブラウザは Chromium です。
+設定ファイルがまだ無いあいだも、再生に使うブラウザは Chromium です。Firefox と WebKit は初版では使いません。
 
 ## ディレクトリ
 
 ```text
 docs/requirements.md    要件定義
-tests/*.spec.ts         YouTube 自動再生のテスト。要件が決まるまでファイルは置かない
+docs/design.md          初版の設計
+tests/*.spec.ts         YouTube 自動再生のテスト。設計の実装時に追加する
 tsconfig.json           TypeScript の設定。JavaScript は出力しない
 package.json            test と typecheck
 ```
 
-再生のテストはまだありません。`npm test` は、テストファイルが無いため失敗します。
+再生のテストはまだありません。`npm test` は、テストファイルが無いため失敗します。動画 URL は環境変数 `YOUTUBE_URL` から読み、リポジトリには書きません。
 
-## まだ実装しないこと
+## 対象外
 
-[docs/requirements.md](docs/requirements.md) の「YouTube 自動再生」が決まるまで、再生処理、ログイン、使用ブラウザの固定、広告や同意ダイアログの処理は追加しません。
-
-再生回数や評価の水増し、ログイン情報のリポジトリへの保存は対象外です。
+再生回数や評価の水増し、ログイン情報のリポジトリへの保存は対象外です。初版の成功と失敗は [docs/design.md](docs/design.md) に従います。

@@ -1,23 +1,18 @@
 ---
-description: 要件定義に反する YouTube 実装と、認証情報の保存を避ける
+description: 設計書に従う YouTube 再生と、認証情報の保存を避ける
 alwaysApply: true
 ---
 
 # プロジェクト制約
 
-要件の正本は `docs/requirements.md` です。実装や文書を変えるときは、このファイルと矛盾させないでください。
+要件の正本は `docs/requirements.md`、初版の動作の正本は `docs/design.md` です。実装や文書を変えるときは、この2つと矛盾させないでください。
 
-## 未決定のあいだ実装しない
-
-「YouTube 自動再生」の項目が未決定のあいだ、再生、ログイン、ブラウザの固定、広告や同意ダイアログの処理を追加しません。
+再生処理は `docs/design.md` の範囲だけにします。ログイン、再生を続けたままにする処理、同意ボタンや広告のスキップは追加しません。
 
 ```ts
-// 未決定のまま再生を始めない
-await page.goto('https://www.youtube.com/watch?v=...');
-await page.getByRole('button', { name: '再生' }).click();
+// ログインや広告スキップで先へ進まない
+await page.getByRole('button', { name: '同意する' }).click();
 ```
-
-決まった項目だけを `docs/requirements.md` に書き、その範囲で実装します。
 
 ## 対象外
 
